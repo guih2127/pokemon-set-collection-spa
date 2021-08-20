@@ -5,8 +5,11 @@ import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 const CardListComponent = ({ cards, onCardClick, type }) => {
     const [numberOfCardsByPage, setnumberOfCardsByPage] = useState(5);
 
-    const IconText = ({ icon, text }) => (
-        <Space>
+    const IconText = ({ icon, text, card }) => (
+        <Space 
+            style={{cursor: 'pointer'}} 
+            onClick={() => onCardClick(card.id)} 
+        >
             {React.createElement(icon)}
             {text}
         </Space>
@@ -55,7 +58,12 @@ const CardListComponent = ({ cards, onCardClick, type }) => {
                 <List.Item
                     key={card.id}
                     actions={[
-                        <IconText icon={ListIcon()} text={IconMessage()} key="list-vertical-star-o" />
+                        <IconText 
+                            icon={ListIcon()} 
+                            text={IconMessage()}
+                            card={card}
+                            key="list-vertical-star-o"
+                        />
                     ]}
                     extra={
                         <img
@@ -65,11 +73,10 @@ const CardListComponent = ({ cards, onCardClick, type }) => {
                         />
                     }
                 >
-                    <List.Item.Meta
-                        title={<a href={card.id}>{card.name}</a>}
-                        description={card.name}
-                    />
-                    {card.name}
+                <List.Item.Meta
+                    title={<a href={card.id}>{card.name}</a>}
+                    description={card.rarity}
+                />
                 </List.Item>
             )}
         />
