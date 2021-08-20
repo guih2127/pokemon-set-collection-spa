@@ -1,14 +1,15 @@
 import { List, Space } from 'antd';
 import React, { useState } from 'react';
 import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import Spinner from './SpinnerComponent';
 
-const CardListComponent = ({ cards, onCardClick, type }) => {
+const CardListComponent = ({ cards, onCardClick, type, loading }) => {
     const [numberOfCardsByPage, setnumberOfCardsByPage] = useState(5);
 
     const IconText = ({ icon, text, card }) => (
-        <Space 
-            style={{cursor: 'pointer'}} 
-            onClick={() => onCardClick(card.id)} 
+        <Space
+            style={{ cursor: 'pointer' }}
+            onClick={() => onCardClick(card.id)}
         >
             {React.createElement(icon)}
             {text}
@@ -39,48 +40,52 @@ const CardListComponent = ({ cards, onCardClick, type }) => {
         return 'Remover da coleção';
     }
 
-    return (
-        <List
-            itemLayout="vertical"
-            size="large"
-            pagination={{
-                onShowSizeChange: (current, pageSize) => setnumberOfCardsByPage(pageSize),
-                pageSize: numberOfCardsByPage,
-                pageSizeOptions: [5, 10, 15, 20, 25, 50]
-            }}
-            dataSource={cards}
-            footer={
-                <div>
-                    <b>{cards.length}</b> {ListMessage()}
-                </div>
-            }
-            renderItem={card => (
-                <List.Item
-                    key={card.id}
-                    actions={[
-                        <IconText 
-                            icon={ListIcon()} 
-                            text={IconMessage()}
-                            card={card}
-                            key="list-vertical-star-o"
+    if (!loading) {
+        return (
+            <List
+                itemLayout="vertical"
+                size="large"
+                pagination={{
+                    onShowSizeChange: (current, pageSize) => setnumberOfCardsByPage(pageSize),
+                    pageSize: numberOfCardsByPage,
+                    pageSizeOptions: [5, 10, 15, 20, 25, 50]
+                }}
+                dataSource={cards}
+                footer={
+                    <div>
+                        <b>{cards.length}</b> {ListMessage()}
+                    </div>
+                }
+                renderItem={card => (
+                    <List.Item
+                        key={card.id}
+                        actions={[
+                            <IconText
+                                icon={ListIcon()}
+                                text={IconMessage()}
+                                card={card}
+                                key="list-vertical-star-o"
+                            />
+                        ]}
+                        extra={
+                            <img
+                                width={100}
+                                alt="logo"
+                                src={card.images.small}
+                            />
+                        }
+                    >
+                        <List.Item.Meta
+                            title={<a href={card.id}>{card.name}</a>}
+                            description={card.rarity}
                         />
-                    ]}
-                    extra={
-                        <img
-                            width={100}
-                            alt="logo"
-                            src={card.images.small}
-                        />
-                    }
-                >
-                <List.Item.Meta
-                    title={<a href={card.id}>{card.name}</a>}
-                    description={card.rarity}
-                />
-                </List.Item>
-            )}
-        />
-    );
+                    </List.Item>
+                )}
+            />
+        );
+    }
+
+    return <Spinner />
 };
 
 export default CardListComponent;

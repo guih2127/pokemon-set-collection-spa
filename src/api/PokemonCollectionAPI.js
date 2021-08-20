@@ -10,7 +10,7 @@ const pokemonCollectionAPI = axios.create({
 pokemonCollectionAPI.interceptors.request.use(config => {
     const token = localStorage.getItem("token");
     // config.headers.authorization = `Bearer ${token}`;
-    config.headers.authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiVXN1w6FyaW8iLCJuYmYiOjE2Mjk0MzM3MDQsImV4cCI6MTYyOTQ0MDkwNCwiaWF0IjoxNjI5NDMzNzA0fQ.sB59VbdtkrckVugIhwuiEQIt71gIWraTIX2I3nTRjys'
+    config.headers.authorization = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiVXN1w6FyaW8iLCJuYmYiOjE2Mjk0NjUzMzQsImV4cCI6MTYyOTQ3MjUzNCwiaWF0IjoxNjI5NDY1MzM0fQ.lHqtDyW29ernVfeU6ZEF7McDN5IIPyczlnzlYSfUU50'
 
     return config;
 })
