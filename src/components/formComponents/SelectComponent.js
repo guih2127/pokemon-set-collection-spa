@@ -1,5 +1,5 @@
 import { Select } from 'antd';
-import Spinner from './SpinnerComponent';
+import Spinner from '../SpinnerComponent';
 
 const { Option } = Select;
 

@@ -46,9 +46,9 @@ const CardListComponent = ({ cards, onCardClick, type, loading }) => {
                 itemLayout="vertical"
                 size="large"
                 pagination={{
-                    onShowSizeChange: (current, pageSize) => setnumberOfCardsByPage(pageSize),
+                    pageSizeOptions: [5, 10, 15, 20, 25, 50],
                     pageSize: numberOfCardsByPage,
-                    pageSizeOptions: [5, 10, 15, 20, 25, 50]
+                    onShowSizeChange: (page, pageSize) => setnumberOfCardsByPage(pageSize)
                 }}
                 dataSource={cards}
                 footer={

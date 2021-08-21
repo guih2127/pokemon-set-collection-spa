@@ -3,7 +3,7 @@ import { Content } from "antd/lib/layout/layout";
 import { useState, useEffect } from "react";
 import CardListComponent from "../components/CardListComponent";
 import CollectionStatistcsComponent from "../components/CollectionStatisticsComponent";
-import SelectComponent from "../components/SelectComponent";
+import SelectComponent from "../components/formComponents/SelectComponent";
 import CardService from "../services/CardService";
 import SetService from "../services/SetService";
 
@@ -69,6 +69,7 @@ const CollectionPage = () => {
         await CardService.PostUserCard(externalId)
             .then(response => {
                 setObtainedCardsIds(response.data);
+                setPercentage(calculatePercentage());
             })
             .catch(error => {
                 console.log(error);
@@ -79,6 +80,7 @@ const CollectionPage = () => {
         await CardService.DeleteUserCard(externalId)
             .then(response => {
                 setObtainedCardsIds(response.data);
+                setPercentage(calculatePercentage());
             })
             .catch(error => {
                 console.log(error);
