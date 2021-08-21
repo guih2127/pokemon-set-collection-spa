@@ -6,6 +6,7 @@ import CollectionStatistcsComponent from "../components/CollectionStatisticsComp
 import SelectComponent from "../components/formComponents/SelectComponent";
 import CardService from "../services/CardService";
 import SetService from "../services/SetService";
+import exportFromJSON from 'export-from-json'  
 
 const CollectionPage = () => {
     const [sets, setSets] = useState([]);
@@ -18,6 +19,9 @@ const CollectionPage = () => {
     const [loadingListCardsObtained, setloadingListCardsObtained] = useState(true);
     const [loadingStatistcs, setloadingStatistcs] = useState(true);
     const [loadingCollectionSelect, setloadingCollectionSelect] = useState(true);
+
+    const fileName = 'Lista de cartas'  
+    const exportType = 'xls'
 
     const retrieveSets = async () => {
         setloadingCollectionSelect(true);
@@ -95,6 +99,16 @@ const CollectionPage = () => {
         return parseInt(getUserCardsFromCollection().length * 100 / cards.length);
     }
 
+    const ExportToExcel = (cards) => {
+        const data = cards.map(card => ({
+            Number: card.number,
+            Name: card.name,
+            Rarity: card.rarity
+        }));
+
+        exportFromJSON({ data, fileName, exportType });
+    }
+
     useEffect(() => {
         retrieveSets();
         getUserCards();
@@ -128,6 +142,7 @@ const CollectionPage = () => {
                         type="NAO_OBTIDOS"
                         onCardClick={addCardToCollection}
                         loading={loadingListCards}
+                        exportToXls={ExportToExcel}
                     />
                 </Col>
                 <Col span={8}>

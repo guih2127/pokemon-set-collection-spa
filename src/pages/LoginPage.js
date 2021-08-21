@@ -1,4 +1,4 @@
-import { UserOutlined } from "@ant-design/icons";
+import { SmileOutlined, UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import ButtonComponent from "../components/formComponents/ButtonComponent";
 import InputComponent from "../components/formComponents/InputComponent";
@@ -18,7 +18,13 @@ const LoginPage = () => {
             .then(response => {
                 localStorage.setItem("token", response.data.token);
                 history.push('/Collection');
-                openNotification("Sucesso!", "Logado com sucesso!");
+
+                openNotification(
+                    "Sucesso!", 
+                    "Logado com sucesso!",
+                    SmileOutlined,
+                    'bottomRight'
+                );
             })
             .catch(error => {
                 console.log(error);

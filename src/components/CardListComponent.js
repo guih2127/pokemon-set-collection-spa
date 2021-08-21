@@ -2,8 +2,9 @@ import { List, Space } from 'antd';
 import React, { useState } from 'react';
 import { DeleteOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import Spinner from './SpinnerComponent';
+import ButtonComponent from './formComponents/ButtonComponent';
 
-const CardListComponent = ({ cards, onCardClick, type, loading }) => {
+const CardListComponent = ({ cards, onCardClick, type, loading, exportToXls }) => {
     const [numberOfCardsByPage, setnumberOfCardsByPage] = useState(5);
 
     const IconText = ({ icon, text, card }) => (
@@ -40,48 +41,64 @@ const CardListComponent = ({ cards, onCardClick, type, loading }) => {
         return 'Remover da coleção';
     }
 
+    const ButtonExportToXls = () => {
+        if (exportToXls) {
+            return (
+                <ButtonComponent 
+                    label={'Exportar para excel'} 
+                    type={'primary'}
+                    onClick={() => exportToXls(cards)}
+                />
+            )
+        }
+    }
+
     if (!loading) {
         return (
-            <List
-                itemLayout="vertical"
-                size="large"
-                pagination={{
-                    pageSizeOptions: [5, 10, 15, 20, 25, 50],
-                    pageSize: numberOfCardsByPage,
-                    onShowSizeChange: (page, pageSize) => setnumberOfCardsByPage(pageSize)
-                }}
-                dataSource={cards}
-                footer={
-                    <div>
-                        <b>{cards.length}</b> {ListMessage()}
-                    </div>
-                }
-                renderItem={card => (
-                    <List.Item
-                        key={card.id}
-                        actions={[
-                            <IconText
-                                icon={ListIcon()}
-                                text={IconMessage()}
-                                card={card}
-                                key="list-vertical-star-o"
+            <div>
+                <List
+                    itemLayout="vertical"
+                    size="large"
+                    pagination={{
+                        pageSizeOptions: [5, 10, 15, 20, 25, 50],
+                        pageSize: numberOfCardsByPage,
+                        onShowSizeChange: (page, pageSize) => setnumberOfCardsByPage(pageSize)
+                    }}
+                    dataSource={cards}
+                    footer={
+                        <div>
+                            <b>{cards.length}</b> {ListMessage()}
+                        </div>
+                    }
+                    renderItem={card => (
+                        <List.Item
+                            key={card.id}
+                            actions={[
+                                <IconText
+                                    icon={ListIcon()}
+                                    text={IconMessage()}
+                                    card={card}
+                                    key="list-vertical-star-o"
+                                />
+                            ]}
+                            extra={
+                                <img
+                                    width={100}
+                                    alt="logo"
+                                    src={card.images.small}
+                                />
+                            }
+                        >
+                            <List.Item.Meta
+                                title={<a href={card.id}>{card.name}</a>}
+                                description={card.rarity}
                             />
-                        ]}
-                        extra={
-                            <img
-                                width={100}
-                                alt="logo"
-                                src={card.images.small}
-                            />
-                        }
-                    >
-                        <List.Item.Meta
-                            title={<a href={card.id}>{card.name}</a>}
-                            description={card.rarity}
-                        />
-                    </List.Item>
-                )}
-            />
+                        </List.Item>
+                    )}
+                />
+
+                {ButtonExportToXls()}
+            </div>
         );
     }
 
