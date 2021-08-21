@@ -102,7 +102,7 @@ const CardListComponent = ({ cards, onCardClick, type, loading, exportToXls }) =
         );
     }
 
-    return <Spinner />
+    return <Spinner style={{ textAlign: 'center', marginTop: '45%' }} />
 };
 
 export default CardListComponent;

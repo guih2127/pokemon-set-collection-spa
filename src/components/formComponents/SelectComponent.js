@@ -43,7 +43,7 @@ const SelectComponent = ({ label, options, setSelectedOption, selectedOption, lo
         )
     }
 
-    return <Spinner />
+    return <Spinner style={{ textAlign: 'center' }} />
 };
 
 export default SelectComponent;

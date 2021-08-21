@@ -22,7 +22,7 @@ const CollectionStatistcsComponent = ({ percentage, cardsObtained, totalCards, l
         )
     }
 
-    return <Spinner />
+    return <Spinner style={{ textAlign: 'center', marginTop: '45%' }} />
 };
 
 export default CollectionStatistcsComponent;

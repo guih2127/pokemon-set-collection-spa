@@ -7,6 +7,7 @@ import SelectComponent from "../components/formComponents/SelectComponent";
 import CardService from "../services/CardService";
 import SetService from "../services/SetService";
 import exportFromJSON from 'export-from-json'  
+import NavbarComponent from "../components/NavbarComponent";
 
 const CollectionPage = () => {
     const [sets, setSets] = useState([]);
@@ -21,7 +22,7 @@ const CollectionPage = () => {
     const [loadingCollectionSelect, setloadingCollectionSelect] = useState(true);
 
     const fileName = 'Lista de cartas'  
-    const exportType = 'xls'
+    const exportType = 'txt'
 
     const retrieveSets = async () => {
         setloadingCollectionSelect(true);
@@ -126,6 +127,7 @@ const CollectionPage = () => {
 
     return (
         <Content style={{ padding: '2vh' }}>
+            <NavbarComponent />
             <Row style={{ margin: '1vh' }}>
                 <SelectComponent
                     setSelectedOption={setSelectedSet}

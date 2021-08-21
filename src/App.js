@@ -24,6 +24,9 @@ const App = () =>{
                 <Route path="/Login">
                     <Login />
                 </Route>
+                <Route path="/Logout">
+                    <Logout />
+                </Route>
                 <Route path="/Collection">
                     <Collection />
                 </Route>
@@ -31,6 +34,11 @@ const App = () =>{
         </Router>
     )
 };
+
+function Logout() {
+    localStorage.removeItem("token");
+    return <LoginPage/>
+}
 
 function Login() {
     return <LoginPage />

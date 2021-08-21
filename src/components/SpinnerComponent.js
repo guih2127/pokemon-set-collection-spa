@@ -1,8 +1,8 @@
 import { Space, Spin } from "antd";
 
-const Spinner = () => {
+const Spinner = ({ style }) => {
     return (
-        <div style={{textAlign: 'center'}}>
+        <div style={style}>
             <Space size="middle">
                 <Spin size="large" />
             </Space>
